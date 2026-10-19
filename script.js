@@ -875,7 +875,6 @@ function initMemoryGallery() {
       const isVideo = item.type === "video";
 
       card.innerHTML = `
-        <button class="card-remove-btn" title="Remove this picture from gallery" aria-label="Remove photo">🗑️</button>
         <div class="polaroid-tape"></div>
         <div class="polaroid-media-box">
           ${isVideo ? `
@@ -883,30 +882,15 @@ function initMemoryGallery() {
               <source src="${item.src}" type="video/mp4">
               <source src="Coconut & Me/${item.fileName}" type="video/mp4">
             </video>
-            <div class="video-badge"><span>🎬</span> Video</div>
             <div class="play-overlay-icon"><span>▶</span></div>
           ` : `
-            <img src="${item.src}" alt="${item.caption}" loading="lazy" decoding="async" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='Coconut & Me/${item.fileName}';}">
+            <img src="${item.src}" alt="I love you" loading="lazy" decoding="async" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='Coconut & Me/${item.fileName}';}">
           `}
-          <div class="polaroid-date-badge">${item.date}</div>
         </div>
         <div class="polaroid-caption-area">
-          <p class="polaroid-caption">${item.caption}</p>
-          <div class="polaroid-tags">
-            ${item.favorite ? '<span>⭐ Highlight</span> • ' : ''}
-            <span>${isVideo ? 'Video Reel' : 'Photo'}</span>
-          </div>
+          <p class="polaroid-caption">I love you 🌻</p>
         </div>
       `;
-
-      // Card remove button click
-      const removeBtn = card.querySelector(".card-remove-btn");
-      if (removeBtn) {
-        removeBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          removePhoto(item.fileName);
-        });
-      }
 
       // 3D Perspective Tilt Effect on Mouse Move
       card.addEventListener("mousemove", (e) => {
@@ -1084,9 +1068,9 @@ function initLightbox() {
       mediaContainer.appendChild(img);
     }
 
-    if (titleEl) titleEl.textContent = memory.title;
-    if (captionEl) captionEl.textContent = memory.caption;
-    if (dateEl) dateEl.textContent = memory.date;
+    if (titleEl) titleEl.textContent = "I love you 🌻";
+    if (captionEl) captionEl.textContent = "Every single moment with you is precious.";
+    if (dateEl) dateEl.style.display = "none";
     if (counterEl) counterEl.textContent = `${state.activeLightboxIndex + 1} / ${state.filteredMemories.length}`;
   }
 
