@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday to My Sunshine 🌻 | A Special Celebration</title>
+  <meta name="description" content="A warm, golden hour birthday celebration website filled with memories, love notes, and sunflowers.">
+  
+  <!-- Google Fonts: Luxurious Playfair Display, Modern Outfit, and Sweet Handwritten Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌻</text></svg>">
+</head>
+<body>
+
+  <!-- Floating Background Petals Canvas (Always Active) -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Celebration Confetti Canvas (Active on Triggers) -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================================
+       STAGE 1: THE ENVELOPE / OPENING STAGE
+       ======================================================== -->
+  <section id="envelope-stage" class="stage-active">
+    <div class="ambient-glow"></div>
+    <div class="envelope-container">
+      <div class="envelope-card-wrapper" id="envelopeWrapper">
+        <div class="envelope" id="envelope">
+          <!-- Back flap -->
+          <div class="envelope-back"></div>
+          
+          <!-- Letter inside that peeks out -->
+          <div class="letter-preview" id="letterPreview">
+            <div class="letter-inner">
+              <span class="letter-mini-sunflower">🌻</span>
+              <p class="letter-teaser-text">To the love of my life, my eternal sunshine...</p>
+              <div class="letter-mini-line"></div>
+            </div>
+          </div>
+          
+          <!-- Left, right, bottom folded pockets -->
+          <div class="envelope-pocket"></div>
+          <div class="envelope-left"></div>
+          <div class="envelope-right"></div>
+          
+          <!-- Top folding flap -->
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          
+          <!-- Wax Seal -->
+          <div class="sunflower-seal" id="sunflowerSeal" title="Click to break seal">
+            <div class="seal-glow-ring"></div>
+            <div class="seal-inner">
+              <svg viewBox="0 0 100 100" class="seal-svg" aria-hidden="true">
+                <!-- Golden Sunflower Stamp Graphic -->
+                <circle cx="50" cy="50" r="45" fill="#f59e0b" stroke="#fbbf24" stroke-width="3" />
+                <g fill="#d97706" opacity="0.9">
+                  <!-- Petals ring -->
+                  <ellipse cx="50" cy="20" rx="8" ry="18" />
+                  <ellipse cx="50" cy="80" rx="8" ry="18" />
+                  <ellipse cx="20" cy="50" rx="18" ry="8" />
+                  <ellipse cx="80" cy="50" rx="18" ry="8" />
+                  <ellipse cx="29" cy="29" rx="8" ry="18" transform="rotate(-45 29 29)" />
+                  <ellipse cx="71" cy="71" rx="8" ry="18" transform="rotate(-45 71 71)" />
+                  <ellipse cx="71" cy="29" rx="8" ry="18" transform="rotate(45 71 29)" />
+                  <ellipse cx="29" cy="71" rx="8" ry="18" transform="rotate(45 29 71)" />
+                </g>
+                <circle cx="50" cy="50" r="19" fill="#78350f" stroke="#92400e" stroke-width="2" />
+                <!-- Sunflower Seeds detail -->
+                <circle cx="46" cy="46" r="2.5" fill="#f59e0b" />
+                <circle cx="54" cy="46" r="2.5" fill="#f59e0b" />
+                <circle cx="50" cy="53" r="2.5" fill="#f59e0b" />
+                <circle cx="43" cy="52" r="2" fill="#fbbf24" />
+                <circle cx="57" cy="52" r="2" fill="#fbbf24" />
+              </svg>
+              <span class="seal-sparkle">✨</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Envelope Greeting & Action -->
+      <div class="envelope-controls" id="envelopeControls">
+        <div class="pill-badge">
+          <span class="pulse-dot"></span> A Golden Birthday Delivery
+        </div>
+        <h1 class="envelope-title">For My Favorite Person In The World</h1>
+        <p class="envelope-subtitle">A special corner of the universe crafted with warm golden light, heartfelt memories, and endless love just for you.</p>
+        
+        <button id="openSurpriseBtn" class="btn-golden-glow" aria-label="Open your birthday surprise">
+          <span class="btn-text">Open Your Surprise</span>
+          <span class="btn-icon">🌻</span>
+          <span class="btn-shine"></span>
+        </button>
+        <span class="envelope-hint">Click the button or touch the glowing seal</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       STAGE 2: MAIN BIRTHDAY WEBSITE
+       ======================================================== -->
+  <main id="main-site" class="main-hidden">
+    
+    <!-- Floating Audio Control Pill -->
+    <div id="audio-control" class="audio-pill" role="region" aria-label="Background Music Controls">
+      <button id="musicToggleBtn" class="music-btn" aria-label="Toggle background music" title="Toggle Marakkavillayae Melody">
+        <div class="music-disc" id="musicDisc">
+          <span class="disc-sunflower">🌻</span>
+        </div>
+        <div class="music-info">
+          <span class="music-title">Marakkavillayae</span>
+          <span class="music-status" id="musicStatusText">Tap to Play 🎵</span>
+        </div>
+        <div class="music-waves" id="musicWaves" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Quick Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav" aria-label="Page navigation">
+      <a href="#hero" class="nav-item active" title="Top"><span>🌻</span> Home</a>
+      <a href="#memories" class="nav-item" title="Our Memories"><span>📷</span> Memories</a>
+      <a href="#sunshine-jar" class="nav-item" title="Sunshine Jar"><span>🍯</span> Love Notes</a>
+      <a href="#birthday-wish" class="nav-item" title="Make a Wish"><span>🎂</span> Wish</a>
+      <a href="#celebration" class="nav-item" title="Love Letter"><span>💌</span> Finale</a>
+    </nav>
+
+    <!-- SECTION 1: HERO GREETING -->
+    <section id="hero" class="section hero-section">
+      <div class="container hero-container">
+        
+        <div class="hero-badge animate-fade-in">
+          <span class="badge-icon">✨</span>
+          <span id="heroBadgeText">Celebrating Another Golden Year Of You</span>
+          <span class="badge-icon">✨</span>
+        </div>
+
+        <h1 class="hero-title animate-fade-in-up">
+          Happy Birthday to <br>
+          <span class="gradient-gold-text text-glow">My Sunshine</span> 
+          <span class="hero-flower-spin">🌻</span>
+        </h1>
+
+        <p class="hero-message animate-fade-in-up delay-1" id="heroMessage">
+          To the girl whose laugh is warmer than the sweetest summer afternoon, and whose heart radiates pure gold. 
+          Today is all about celebrating you, my favorite soul in the whole universe.
+        </p>
+
+        <!-- Golden Birthday Countdown (Today to Tomorrow) -->
+        <div class="love-counter-card glass-panel animate-fade-in-up delay-2" id="countdownCard">
+          <div class="counter-header">
+            <span class="sparkle-icon">✨</span>
+            <span class="counter-subtitle" id="counterLabel">Counting Down To Your Special Day 🌻</span>
+            <span class="sparkle-icon">✨</span>
+          </div>
+          <div class="counter-grid" id="countdownGrid">
+            <div class="counter-box" id="daysBox" style="display: none;">
+              <span class="counter-num" id="counterDays">00</span>
+              <span class="counter-tag">Days</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-num" id="counterHours">--</span>
+              <span class="counter-tag">Hours Left</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-num" id="counterMinutes">--</span>
+              <span class="counter-tag">Minutes</span>
+            </div>
+            <div class="counter-box">
+              <span class="counter-num" id="counterSeconds">--</span>
+              <span class="counter-tag">Seconds</span>
+            </div>
+          </div>
+          <div id="countdownCelebrationMsg" class="countdown-celebration-banner hidden">
+            🎉 IT'S YOUR BIRTHDAY! HAPPY BIRTHDAY MY SUNSHINE! 🌻
+          </div>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="hero-actions animate-fade-in-up delay-3">
+          <a href="#memories" class="btn-golden">
+            <span>Walk Down Memory Lane</span>
+            <span class="btn-arrow">↓</span>
+          </a>
+          <a href="#sunshine-jar" class="btn-glass">
+            <span>The Sunshine Jar</span>
+            <span>🍯</span>
+          </a>
+        </div>
+
+        <div class="scroll-indicator" aria-hidden="true">
+          <span class="scroll-mouse">
+            <span class="scroll-wheel"></span>
+          </span>
+          <span class="scroll-text">Scroll to explore</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION 2: INTERACTIVE MEMORY LANE (POLAROIDS & REELS) -->
+    <section id="memories" class="section memories-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="pill-badge pill-center">
+            <span>📸</span> Cherished Moments
+          </div>
+          <h2 class="section-title">Our Golden Memory Lane</h2>
+          <p class="section-subtitle">
+            Snapshots of our laughter, our adventures, and the sweet ordinary moments that become extraordinary with you.
+          </p>
+
+          <!-- Memory Filter Pills & Quick Controls -->
+          <div class="gallery-controls-wrapper">
+            <div class="filter-bar" id="memoryFilterBar">
+              <button class="filter-btn active" data-filter="all" id="filterAllBtn">All Memories (<span id="countAll">0</span>)</button>
+              <button class="filter-btn" data-filter="photo" id="filterPhotoBtn">Photos 📷 (<span id="countPhotos">0</span>)</button>
+              <button class="filter-btn" data-filter="video" id="filterVideoBtn">Videos 🎬 (<span id="countVideos">0</span>)</button>
+              <button class="filter-btn" data-filter="favorite" id="filterFavBtn">Highlights ⭐ (<span id="countFavs">0</span>)</button>
+            </div>
+            
+            <div class="gallery-action-buttons">
+              <button class="btn-shuffle" id="shuffleMemoriesBtn" title="Shuffle Memory Order">
+                <span>🔀</span> <span>Shuffle</span>
+              </button>
+              <button class="btn-manage-gallery" id="toggleManageBtn" title="Click to show trash icons on cards to remove unwanted pictures">
+                <span>🗑️</span> <span id="manageBtnText">Remove Mode</span>
+              </button>
+              <button class="btn-restore-gallery hidden" id="restoreHiddenBtn" title="View or restore removed photos">
+                <span>↩️</span> <span id="hiddenCountText">Removed (0)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroid Memory Grid with 3D Tilt -->
+        <div class="polaroid-grid" id="polaroidGrid">
+          <!-- Injected dynamically with all 110+ photos and videos -->
+        </div>
+
+        <!-- Pagination / Load More Bar -->
+        <div class="gallery-pagination" id="galleryPagination">
+          <button id="loadMoreBtn" class="btn-golden">
+            <span id="loadMoreText">Load More Memories</span>
+            <span>🌻</span>
+          </button>
+          <button id="showAllBtn" class="btn-glass btn-sm">Show All Memories At Once ✨</button>
+        </div>
+
+        <!-- Helper hint for swapping/adding more -->
+        <div class="memory-footer-tip glass-panel text-center">
+          <p>
+            💡 <strong id="partnerNameTip">Sweet memories with Coconut</strong> • Click any polaroid to view high-res or watch video clips!
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 3: THE SUNSHINE JAR (INTERACTIVE LOVE NOTES) -->
+    <section id="sunshine-jar" class="section jar-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="pill-badge pill-center">
+            <span>🍯</span> A Jar Full Of Sweetness
+          </div>
+          <h2 class="section-title">The Sunshine Jar</h2>
+          <p class="section-subtitle">
+            Whenever you need a reminder of how cherished you are, reach into this virtual jar. Each tap pulls out a reason why I adore you.
+          </p>
+        </div>
+
+        <div class="jar-interactive-stage">
+          
+          <!-- Virtual Glass Jar with Floating Sparkles -->
+          <div class="jar-display-wrapper">
+            <div class="jar-aura"></div>
+            
+            <div class="virtual-jar" id="virtualJar" role="button" tabindex="0" aria-label="Click to open a love note from the sunshine jar">
+              <!-- Jar Lid -->
+              <div class="jar-lid">
+                <div class="lid-top"></div>
+                <div class="lid-neck"></div>
+                <div class="lid-ribbon">
+                  <span class="ribbon-knot">🎀</span>
+                </div>
+              </div>
+              
+              <!-- Jar Glass Body -->
+              <div class="jar-body">
+                <div class="glass-reflection"></div>
+                <div class="glass-specular"></div>
+                
+                <!-- Floating Glowing Orbs & Sunflower Seeds inside the jar -->
+                <div class="jar-fireflies" id="jarFireflies" aria-hidden="true">
+                  <span class="firefly f1"></span>
+                  <span class="firefly f2"></span>
+                  <span class="firefly f3"></span>
+                  <span class="firefly f4"></span>
+                  <span class="firefly f5"></span>
+                  <span class="firefly f6"></span>
+                </div>
+
+                <!-- Folded origami notes inside -->
+                <div class="jar-notes-stack" aria-hidden="true">
+                  <div class="folded-note fn1">🌻</div>
+                  <div class="folded-note fn2">✨</div>
+                  <div class="folded-note fn3">💛</div>
+                  <div class="folded-note fn4">🍯</div>
+                  <div class="folded-note fn5">🌻</div>
+                </div>
+
+                <!-- Jar Label -->
+                <div class="jar-label">
+                  <span class="jar-label-sunflower">🌻</span>
+                  <span class="jar-label-title">Reasons I Love You</span>
+                  <span class="jar-label-sub">Tap Me For Magic</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action prompt -->
+            <div class="jar-actions-wrapper">
+              <button id="drawNoteBtn" class="btn-golden-glow btn-jar-draw">
+                <span>Draw A Love Note</span>
+                <span>✨</span>
+              </button>
+              <div class="jar-counter-badge">
+                <span id="notesDrawnCount">0</span> of <span id="notesTotalCount">30</span> Notes Discovered
+              </div>
+              <button id="viewAllNotesBtn" class="btn-link">View All Notes Library 📖</button>
+            </div>
+
+          </div>
+
+          <!-- Recently Drawn Note Feature Card -->
+          <div class="featured-note-container" id="featuredNoteContainer">
+            <div class="note-paper glass-panel" id="activeNoteCard">
+              <div class="note-pin">📌</div>
+              <div class="note-paper-header">
+                <span class="note-badge" id="activeNoteNumber">Note #1</span>
+                <span class="note-date-tag">Pure Truth 💛</span>
+              </div>
+              <p class="note-body-text" id="activeNoteText">
+                "Tap the Sunshine Jar to draw your first golden reason... There are dozens waiting just for you!"
+              </p>
+              <div class="note-footer">
+                <span class="note-sig">Forever your biggest fan 🌻</span>
+                <button class="btn-share-note" id="loveThisNoteBtn" title="Send a heart">
+                  <span>❤️</span> <span id="likeCount">Love this</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 4: MAKE A BIRTHDAY WISH & BLOW CANDLE -->
+    <section id="birthday-wish" class="section wish-section">
+      <div class="container text-center">
+        
+        <div class="pill-badge pill-center">
+          <span>🎂</span> Time For A Tradition
+        </div>
+        <h2 class="section-title">Make A Birthday Wish</h2>
+        <p class="section-subtitle">
+          Close your eyes, think of the happiest thing you want for this year ahead, and tap the glowing candle to blow it out!
+        </p>
+
+        <div class="cake-display glass-panel">
+          <div class="cake-stage">
+            
+            <!-- Sunflower Birthday Cupcake/Cake Graphic -->
+            <div class="candle-container" id="birthdayCandle" role="button" tabindex="0" aria-label="Tap to blow out the birthday candle">
+              <div class="candle-wick"></div>
+              <div class="candle-flame" id="candleFlame">
+                <div class="flame-core"></div>
+                <div class="flame-glow"></div>
+              </div>
+              <div class="candle-smoke" id="candleSmoke"></div>
+              <div class="candle-stick"></div>
+            </div>
+
+            <div class="cake-tier">
+              <div class="frosting-drops"></div>
+              <div class="cake-flowers">
+                <span>🌻</span>
+                <span>✨</span>
+                <span>🌻</span>
+              </div>
+            </div>
+            <div class="cake-stand"></div>
+
+          </div>
+
+          <div class="wish-prompt-box">
+            <p id="wishInstruction" class="wish-instruction">Tap the candle flame to blow it out! 🕯️</p>
+            <div id="wishGrantedMessage" class="wish-granted-msg hidden">
+              <h3>✨ Your Wish Has Been Carried to the Stars! ✨</h3>
+              <p>May every single dream you carry in your beautiful heart blossom into reality this year.</p>
+              <button id="relightCandleBtn" class="btn-glass btn-sm">Light It Again 🕯️</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SECTION 5: FINALE & GOLDEN CELEBRATION -->
+    <section id="celebration" class="section celebration-section">
+      <div class="container text-center">
+        
+        <div class="celebration-card glass-panel">
+          <div class="sunflower-halo-art">🌻</div>
+          
+          <h2 class="celebration-title">Happy Birthday, My Sunshine!</h2>
+          
+          <div class="romantic-letter-body">
+            <p>
+              Thank you for filling every single day with warmth, kindness, and unforgettable laughter. 
+              Like sunflowers turning their faces toward the sun, my heart always naturally finds its way to you.
+            </p>
+            <p>
+              I hope this year brings you as much pure happiness, peace, and sweet adventures as you give to everyone around you. 
+              I am so endlessly lucky to walk through life by your side.
+            </p>
+            <p class="letter-signoff">
+              With all my love, forever & always, <br>
+              <span class="signoff-handwriting">Your Number One Supporter ❤️</span>
+            </p>
+          </div>
+
+          <!-- Celebration Trigger Buttons -->
+          <div class="celebration-buttons">
+            <button id="celebrateBtn" class="btn-golden-glow btn-large">
+              <span>Trigger Golden Confetti</span>
+              <span class="confetti-emoji">🌟</span>
+            </button>
+            <button id="petalBurstBtn" class="btn-glass btn-large">
+              <span>Sunflower Petal Shower</span>
+              <span>🌻</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="birthday-footer">
+          <p class="footer-heart">Made with infinite love & sunshine for your special day 🌻</p>
+          <p class="footer-sub">All rights reserved to your happiness • Forever & always</p>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================================
+       MODALS
+       ======================================================== -->
+
+  <!-- Lightbox Modal for Fullscreen Photos & Videos -->
+  <div id="lightbox-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Media Lightbox">
+    <div class="modal-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content glass-panel">
+      
+      <button class="modal-close-btn" id="lightboxCloseBtn" aria-label="Close Lightbox">&times;</button>
+      
+      <div class="lightbox-media-container" id="lightboxMediaContainer">
+        <!-- Image or Video dynamically inserted -->
+      </div>
+      
+      <div class="lightbox-caption-bar">
+        <div class="lightbox-meta">
+          <span class="lightbox-badge" id="lightboxDateBadge">Oct 1, 2026</span>
+          <h3 class="lightbox-title" id="lightboxTitle">Cherished Memory</h3>
+          <button class="btn-lightbox-delete" id="lightboxDeleteBtn" title="Remove this photo from the website">
+            <span>🗑️</span> Remove This Picture
+          </button>
+        </div>
+        <p class="lightbox-caption" id="lightboxCaption">A golden moment frozen in time.</p>
+        
+        <div class="lightbox-nav-buttons">
+          <button id="lightboxPrevBtn" class="lightbox-nav-btn" aria-label="Previous Memory">&#8592; Prev</button>
+          <span class="lightbox-counter" id="lightboxCounter">1 / 12</span>
+          <button id="lightboxNextBtn" class="lightbox-nav-btn" aria-label="Next Memory">Next &#8594;</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Removed Photos Manager Modal -->
+  <div id="restore-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Removed Photos Manager">
+    <div class="modal-backdrop" id="restoreModalBackdrop"></div>
+    <div class="notes-modal-content glass-panel">
+      <div class="notes-modal-header">
+        <div class="notes-header-left">
+          <span class="modal-icon">🗑️</span>
+          <div>
+            <h3>Removed Photos & Videos</h3>
+            <p>Click "Restore" on any photo you want to bring back, or restore all.</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="restoreModalCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="restore-actions-top">
+        <button id="restoreAllBtn" class="btn-golden btn-sm">Restore All Photos 🌻</button>
+        <button id="copyExcludedListBtn" class="btn-glass btn-sm">Copy Removed List 📋</button>
+      </div>
+
+      <div class="restore-grid-scroll" id="removedItemsGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- All Love Notes Library Modal -->
+  <div id="all-notes-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="All Sunshine Notes">
+    <div class="modal-backdrop" id="notesModalBackdrop"></div>
+    <div class="notes-modal-content glass-panel">
+      <div class="notes-modal-header">
+        <div class="notes-header-left">
+          <span class="modal-icon">🍯</span>
+          <div>
+            <h3>The Full Sunshine Collection</h3>
+            <p>Every single reason why you make the world so beautiful</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="notesModalCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="notes-grid-scroll" id="allNotesGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bgMusic" loop preload="auto" src="music.mp3">
+    <source src="music.mp3" type="audio/mpeg">
+    <source src="Jersey-320kbps-MassTamilan.org/Marakkavillayae-MassTamilan.org.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

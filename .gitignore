@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# Vercel
+.vercel/
+
+# Temp / zip files
+*.zip
+Jersey-320kbps-MassTamilan.org/
+Jersey-320kbps-MassTamilan.org.zip
+
+# Duplicate media files (only keep originals, not (1) copies)
+**(1).*
