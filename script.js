@@ -730,9 +730,10 @@ function initEnvelopeStage() {
 // 8. BIRTHDAY COUNTDOWN (Today to Tomorrow)
 // ========================================================
 function initLoveCounter() {
+  const hoursEl = document.getElementById("counterHours");
+  if (!hoursEl) return; // Countdown removed
   const daysBox = document.getElementById("daysBox");
   const daysEl = document.getElementById("counterDays");
-  const hoursEl = document.getElementById("counterHours");
   const minutesEl = document.getElementById("counterMinutes");
   const secondsEl = document.getElementById("counterSeconds");
   const labelEl = document.getElementById("counterLabel");
